@@ -1,0 +1,16 @@
+{
+  "name": "bet-data",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "playwright": "^1.7.1",
+    "request-promise": "^4.2.6"
+  }
+}
