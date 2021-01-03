@@ -1,7 +1,7 @@
 const path = require('path')
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 
-const getRequestUrl = require('../toolkits/getRequestUrl.js');
+const getRequestUrl = require('../toolkits/data-extraction-toolkit/getRequestUrl.js');
 
 const bvUrl = 'https://www.bovada.lv/sports/player-props?overlay=login'
 const bvBetHistoryRoute = '**/api/mybets*'
