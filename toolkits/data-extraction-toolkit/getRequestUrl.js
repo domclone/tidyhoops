@@ -44,7 +44,10 @@ const getRequestUrl = async (url, route, credentials, selectors) => {
 
     });
   }
-  interceptReq()
+  await interceptReq();
+
+  await page.waitForNavigation(); // if this times out it is due to login not working
+  await browser.close(); // without the above, the browser will close too early
 }
 
 module.exports = getRequestUrl;
