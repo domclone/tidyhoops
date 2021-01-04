@@ -1,11 +1,11 @@
 "use strict";
 
-const request = require('request-promise');
+const axios = require('axios');
 
 async function importJsonFromRestApi(url) {
   try {
-    const response = await request.get(url);
-    return JSON.parse(response);
+    const response = await axios.get(url);
+    return response.data;
   } catch (err) {
     console.error("An error occurred.");
     console.error(err.stack);
