@@ -3,6 +3,7 @@ require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 
 const importJsonFromRestApi = require('../toolkits/data-extraction-toolkit/importJsonFromRestApi.js')
 const getRequestUrl = require('../toolkits/data-extraction-toolkit/getRequestUrl.js');
+const { request } = require('http');
 
 const bvUrl = 'https://www.bovada.lv/sports/player-props?overlay=login'
 const bvBetHistoryRoute = '**/api/mybets*'
@@ -14,14 +15,15 @@ const selectors = {
 };
 
 (async () => {
-  const requestUrl = await getRequestUrl(bvUrl, bvBetHistoryRoute, credentials, selectors);
+  let requestUrl = await getRequestUrl(bvUrl, bvBetHistoryRoute, credentials, selectors);
 
   requestUrl.searchParams.set('bet.isActive', '0');
-  requestUrl.searchParams.set('order', 'desc')
+  requestUrl.searchParams.set('order', 'desc');
   requestUrl.searchParams.delete('limit');
 
-  const cleanedUrl = requestUrl.href
-  const rawBets = await importJsonFromRestApi(cleanedUrl)
+  requestUrl = requestUrl.href
+
+  const rawBets = await importJsonFromRestApi(requestUrl)
 
   const cleanedBets = rawBets.data.map(entry => {
     const bet = {
@@ -42,5 +44,5 @@ const selectors = {
   const straightBets = cleanedBets.filter(bet => bet.isParlay === 0); // we want to filter out parlays for now
   console.log(straightBets);
 
-  return straightBets
+  return straightBets;
 })();
