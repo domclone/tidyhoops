@@ -1,9 +1,10 @@
 const path = require('path')
+const dataForge = require('data-forge');
+const { request } = require('http');
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 
-const importJsonFromRestApi = require('../toolkits/data-extraction-toolkit/importJsonFromRestApi.js')
-const getRequestUrl = require('../toolkits/data-extraction-toolkit/getRequestUrl.js');
-const { request } = require('http');
+const importJsonFromRestApi = require('../toolkits/extract/importJsonFromRestApi.js')
+const getRequestUrl = require('../toolkits/extract/getRequestUrl.js');
 
 const bvUrl = 'https://www.bovada.lv/sports/player-props?overlay=login'
 const bvBetHistoryRoute = '**/api/mybets*'
@@ -42,7 +43,8 @@ const selectors = {
     return bet;
   })
   const straightBets = cleanedBets.filter(bet => bet.isParlay === 0); // we want to filter out parlays for now
-  console.log(straightBets);
+  const df = new dataForge.DataFrame(straightBets);
+  console.log(df.toString());
 
   return straightBets;
 })();

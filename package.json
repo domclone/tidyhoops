@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.21.1",
+    "data-forge": "^1.8.15",
     "dotenv": "^8.2.0",
     "playwright": "^1.7.1"
   }
