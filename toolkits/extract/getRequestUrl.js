@@ -5,9 +5,13 @@ const getRequestUrl = async (url, route, credentials, selectors) => {
   const page = await browser.newPage();
 
   await page.goto(url);
-  await page.fill(selectors.email, credentials.username);
-  await page.fill(selectors.password, credentials.password);
-  await page.click(selectors.submit);
+
+  if (credentials) {
+    await page.fill(selectors.email, credentials.username);
+    await page.fill(selectors.password, credentials.password);
+    await page.click(selectors.submit);
+  }
+
   const request = await page.waitForRequest(route);
   await browser.close(); // without the above, the browser will close too early
 

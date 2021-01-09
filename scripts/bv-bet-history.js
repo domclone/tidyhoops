@@ -3,6 +3,7 @@ const dataForge = require('data-forge');
 const { request } = require('http');
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 
+const Bet = require('../models/bet');
 const importJsonFromRestApi = require('../toolkits/extract/importJsonFromRestApi.js')
 const getRequestUrl = require('../toolkits/extract/getRequestUrl.js');
 
@@ -15,11 +16,10 @@ const selectors = {
   submit: 'button[type="submit"]'
 };
 
-(async () => {
+const betHistory = async () => {
   let requestUrl = await getRequestUrl(bvUrl, bvBetHistoryRoute, credentials, selectors);
 
   requestUrl.searchParams.set('bet.isActive', '0');
-  requestUrl.searchParams.set('order', 'desc');
   requestUrl.searchParams.delete('limit');
 
   requestUrl = requestUrl.href
@@ -28,23 +28,24 @@ const selectors = {
 
   const cleanedBets = rawBets.data.map(entry => {
     const bet = {
+      id: entry.id,
       date: entry.events[0].games[0].date,
-      isParlay: entry.isAccumulator,
-      homeTeam: entry.events[0].games[0].homeTeam.abbreviation,
-      awayTeam: entry.events[0].games[0].visitingTeam.abbreviation,
-      playerTeam: entry.events[0].teams !== null ? entry.events[0].teams[0].abbreviation : null,
+      title: entry.title,
+      odds: entry.odds,
       player: entry.events[0].players !== null ? entry.events[0].players[0].name : null,
       setup: entry.events[0].statistic.title,
-      title: entry.title,
+      playerTeam: entry.events[0].teams !== null ? entry.events[0].teams[0].abbreviation : null,
+      homeTeam: entry.events[0].games[0].homeTeam.abbreviation,
+      awayTeam: entry.events[0].games[0].visitingTeam.abbreviation,
       wager: entry.amount,
-      odds: entry.odds,
-      result: entry.events[0].settlement.result
+      result: entry.events[0].settlement.result,
+      isParlay: entry.isAccumulator
     }
     return bet;
   })
   const straightBets = cleanedBets.filter(bet => bet.isParlay === 0); // we want to filter out parlays for now
-  const df = new dataForge.DataFrame(straightBets);
-  console.log(df.toString());
 
-  return straightBets;
-})();
+  Bet.insertMany(straightBets); // save bets to mongo
+};
+
+module.exports = betHistory;
