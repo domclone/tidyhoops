@@ -35,6 +35,9 @@ const betSchema = new mongoose.Schema({
   result: {
     type: String
   },
+  gain: {
+    type: Number
+  },
   isParlay: {
     type: Number
   }
