@@ -1,9 +1,9 @@
 const path = require('path')
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
-
 const Bet = require('../models/bet');
 const importJsonFromRestApi = require('../toolkits/extract/importJsonFromRestApi.js')
 const getRequestUrl = require('../toolkits/extract/getRequestUrl.js');
+const { connect } = require('../mongoose');
 
 const bvUrl = 'https://www.bovada.lv/sports/player-props?overlay=login'
 const bvBetHistoryRoute = '**/api/mybets*'
@@ -13,6 +13,8 @@ const selectors = {
   password: 'input[type = "password"]',
   submit: 'button[type="submit"]'
 };
+
+let connection = null;
 
 const betHistory = async () => {
   try {
@@ -45,8 +47,11 @@ const betHistory = async () => {
     })
     const straightBets = cleanedBets.filter(bet => bet.isParlay === 0); // we want to filter out parlays for now
 
+    if (connection === null) connection = await connect();
     Bet.insertMany(straightBets); // save bets to mongo
   } catch (err) {
     console.log('error: ' + err)
   }
 };
+
+betHistory();

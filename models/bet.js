@@ -19,4 +19,6 @@ const betSchema = new Schema({
   isParlay: { type: Number }
 });
 
-module.exports = conn.model('Bet', betSchema);
+const Bet = mongoose.model('Bet', betSchema);
+
+module.exports = Bet;
