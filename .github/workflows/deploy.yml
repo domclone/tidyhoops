@@ -27,6 +27,6 @@ jobs:
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_KEY }}
-          aws_region: eu-central-1
-          function_name: express-lambda-example
+          aws_region: us-east-1
+          function_name: tidyhoops-app
           zip_file: app.zip
