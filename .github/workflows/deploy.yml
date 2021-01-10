@@ -1,8 +1,5 @@
 name: deploy to lambda
-on:
-  push:
-    branches:
-      - main
+on: [push]
 jobs:
   deploy:
     name: deploy
