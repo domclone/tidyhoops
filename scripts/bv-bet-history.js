@@ -1,6 +1,4 @@
 const path = require('path')
-const dataForge = require('data-forge');
-const { request } = require('http');
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 
 const Bet = require('../models/bet');
@@ -20,8 +18,8 @@ const betHistory = async () => {
   try {
     let requestUrl = await getRequestUrl(bvUrl, bvBetHistoryRoute, credentials, selectors);
 
-    requestUrl.searchParams.set('bet.isActive', '0');
-    requestUrl.searchParams.delete('limit');
+    requestUrl.searchParams.set('bet.isActive', '0'); // we want settled bets not active bets
+    requestUrl.searchParams.delete('limit'); // we want all bets 
 
     requestUrl = requestUrl.href
 
@@ -52,6 +50,3 @@ const betHistory = async () => {
     console.log('error: ' + err)
   }
 };
-
-
-module.exports = betHistory;
