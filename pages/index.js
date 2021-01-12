@@ -1,4 +1,3 @@
-const nba = require('nba-api-client');
 import Head from 'next/head';
 import Image from "next/image";
 import { connectToDatabase } from "../util/mongodb";
