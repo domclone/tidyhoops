@@ -14,7 +14,7 @@ export default function All({ bets }) {
       </nav>
 
       <div>
-        <h1>tidyhoops bet history</h1>
+        <h1>Bet History</h1>
       </div>
 
       <main>
@@ -39,9 +39,11 @@ export default function All({ bets }) {
           margin: 0;
         }
         h1 {
-          color: hsl(210deg, 8%, 50%);
+          color: hsl(210deg, 25%, 88%);
           text-align: center;
           text-decoration: hsl(30deg, 100%, 50%) underline wavy;
+          text-decoration-thickness: 4.2px;
+          text-underline-position: under right;
           margin: 1em;
           font-size: 40px;
         }
