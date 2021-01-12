@@ -1,4 +1,6 @@
-import Head from 'next/head'
+const nba = require('nba-api-client');
+import Head from 'next/head';
+import Image from "next/image";
 import { connectToDatabase } from "../util/mongodb";
 
 export default function All({ bets }) {
@@ -20,6 +22,13 @@ export default function All({ bets }) {
       <main>
         {bets.map((bet) => (
           <div className={bet.result}>
+            <div className='player-image'>
+              <Image
+                src={nba.getPlayerHeadshotURL({ PlayerID: bet.nbaPlayerId, TeamID: bet.nbaTeamId })}
+                width={200}
+                height={150}
+              />
+            </div>
             <p>{bet.result}</p>
             {/* <p>{bet.gain}</p> */}
             <h2>{bet.title}</h2>
@@ -38,14 +47,22 @@ export default function All({ bets }) {
           font-size: 40px;
           margin: 0;
         }
+        .player-image {
+          display: flex;
+          justify-content: center;
+        }
         h1 {
           color: hsl(210deg, 25%, 88%);
           text-align: center;
           text-decoration: hsl(30deg, 100%, 50%) underline wavy;
           text-decoration-thickness: 4.2px;
-          text-underline-position: under right;
+          text-underline-position: under;
           margin: 1em;
           font-size: 40px;
+          letter-spacing: 2.09px;
+        }
+        h2 {
+          font-size: 16px;
         }
         .Lost, .Pending {
           background: hsl(210deg, 38%, 15%);
