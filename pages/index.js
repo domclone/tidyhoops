@@ -5,8 +5,13 @@ export default function All({ bets }) {
   return (
     <div>
       <Head>
+        <link href="https://fonts.googleapis.com/css2?family=Modak&family=Yusei+Magic&display=swap" rel='stylesheet' />
         <title>tidyhoops</title>
       </Head>
+
+      <nav>
+        <p>tidyhoops</p>
+      </nav>
 
       <div>
         <h1>tidyhoops bet history</h1>
@@ -15,21 +20,30 @@ export default function All({ bets }) {
       <main>
         {bets.map((bet) => (
           <div className={bet.result}>
-            <h3>{bet.result}</h3>
-            <p>{bet.gain}</p>
+            <p>{bet.result}</p>
+            {/* <p>{bet.gain}</p> */}
             <h2>{bet.title}</h2>
           </div>
         ))}
       </main>
 
       <style jsx>{`
-        h1 {
-          color: hsl(230deg, 100%, 67%);
-          text-align: center;
-          margin: 2em;
-        }
-        result {
+        nav {
+          font-family: 'Modak', sans-serif;
+          margin: 1em;
           display: flex;
+          color: hsl(30deg, 100%, 50%);
+        }
+        nav > p {
+          font-size: 40px;
+          margin: 0;
+        }
+        h1 {
+          color: hsl(210deg, 8%, 50%);
+          text-align: center;
+          text-decoration: hsl(30deg, 100%, 50%) underline wavy;
+          margin: 1em;
+          font-size: 40px;
         }
         .Lost, .Pending {
           background: hsl(210deg, 38%, 15%);
@@ -62,18 +76,6 @@ export default function All({ bets }) {
         }
         .Won > p {
           color: hsl(160deg, 100%, 40%);en;
-        }
-        .Lost:hover,
-        .Lost:focus,
-        .Lost:active {
-          color: #0070f3;
-          border-color: #0070f3;
-        }
-        .Won:hover,
-        .Won:focus,
-        .Won:active {
-          color: #0070f3;
-          border-color: #0070f3;
         }
         main {
           color: hsl(210deg, 8%, 50%);
