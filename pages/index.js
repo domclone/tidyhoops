@@ -24,7 +24,7 @@ export default function All({ bets }) {
           <div className={bet.result}>
             <div className='player-image'>
               <Image
-                src={nba.getPlayerHeadshotURL({ PlayerID: bet.nbaPlayerId, TeamID: bet.nbaTeamId })}
+                src={bet.playerHeadshot === null ? '/../public/basketball.jpg' : bet.playerHeadshot}
                 width={200}
                 height={150}
               />
