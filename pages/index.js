@@ -29,7 +29,6 @@ export default function All({ bets }) {
               />
             </div>
             <p>{bet.result}</p>
-            {/* <p>{bet.gain}</p> */}
             <h2>{bet.title}</h2>
           </div>
         ))}
