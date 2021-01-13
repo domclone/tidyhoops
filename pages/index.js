@@ -20,7 +20,7 @@ export default function All({ bets }) {
 
       <main>
         {bets.map((bet) => (
-          <div className={bet.result}>
+          <div className={bet.result} key={bet.id}>
             <div className='player-image'>
               <Image
                 src={bet.playerHeadshot === null ? '/../public/basketball.jpg' : bet.playerHeadshot}
