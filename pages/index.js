@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Image from "next/image";
 import { connectToDatabase } from "../util/mongodb";
 
-export default function All({ bets }) {
+export default function Home({ bets, record }) {
   return (
     <div>
       <Head>
@@ -16,6 +16,7 @@ export default function All({ bets }) {
 
       <div>
         <h1>Bet History</h1>
+        <p className='record'>Record: {record.wins} - {record.losses}</p>
       </div>
 
       <main>
@@ -23,7 +24,7 @@ export default function All({ bets }) {
           <div className={bet.result} key={bet.id}>
             <div className='player-image'>
               <Image
-                src={bet.playerHeadshot === null ? '/../public/basketball.jpg' : bet.playerHeadshot}
+                src={bet.playerHeadshot === null ? '/public/basketball.jpg' : bet.playerHeadshot}
                 width={200}
                 height={150}
               />
@@ -44,6 +45,11 @@ export default function All({ bets }) {
         nav > p {
           font-size: 40px;
           margin: 0;
+        }
+        .record {
+          color: hsl(210deg, 25%, 88%);
+          margin: 0 0 20px 0;
+          text-align: center;
         }
         .player-image {
           display: flex;
@@ -117,14 +123,27 @@ export async function getStaticProps() {
   const { db } = await connectToDatabase();
 
   const bets = await db
-    .collection("bets")
+    .collection('bets')
     .find({})
     .sort({ date: -1 })
     .toArray();
 
+  const wins = await db
+    .collection('bets')
+    .find({ result: 'Won' })
+    .count();
+
+  const losses = await db
+    .collection('bets')
+    .find({ result: 'Lost' })
+    .count();
+
+  const record = { wins, losses }
+
   return {
     props: {
       bets: JSON.parse(JSON.stringify(bets)),
+      record: record,
     },
   };
 }
