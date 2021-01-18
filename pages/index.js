@@ -119,7 +119,7 @@ export default function Home({ bets, record }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const { db } = await connectToDatabase();
 
   const bets = await db
