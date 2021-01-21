@@ -8,6 +8,7 @@ export default function Home({ bets, record }) {
       <Head>
         <link href="https://fonts.googleapis.com/css2?family=Modak&family=Yusei+Magic&display=swap" rel='stylesheet' />
         <title>tidyhoops</title>
+        <meta name='description' content='NBA statistical analysis and player prop bets.' />
       </Head>
 
       <nav>
@@ -25,6 +26,7 @@ export default function Home({ bets, record }) {
             <div className='player-image'>
               <Image
                 src={bet.playerHeadshot === null ? '/public/basketball.jpg' : bet.playerHeadshot}
+                alt='Picture of player'
                 width={220}
                 height={161}
               />
