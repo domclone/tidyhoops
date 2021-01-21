@@ -106,7 +106,7 @@ export default function Home({ bets, record }) {
           padding: 1.5rem;
           text-align: left;
           color: inherit;
-          border: 1px solid hsl(53deg, 100%, 50%);
+          border: 1px solid hsl(30deg, 100%, 50%);
           border-radius: 10px;
           transition: color 0.15s ease, border-color 0.15s ease;
           height: 20em;
@@ -114,7 +114,7 @@ export default function Home({ bets, record }) {
           overflow: auto;
         }
         .Pending > p {
-          color: hsl(53deg, 100%, 50%);
+          color: hsl(30deg, 100%, 50%);
         }
         main {
           color: hsl(210deg, 8%, 50%);
