@@ -68,13 +68,13 @@ export default function Home({ bets, record }) {
         h2 {
           font-size: 16px;
         }
-        .Lost, .Pending {
+        .Lost {
           background: hsl(210deg, 38%, 15%);
           margin: 1em;
           padding: 1.5rem;
           text-align: left;
           color: inherit;
-          border: 1px solid hsl(340deg, 95%, 60%);;
+          border: 1px solid hsl(340deg, 95%, 60%);
           border-radius: 10px;
           transition: color 0.15s ease, border-color 0.15s ease;
           height: 20em;
@@ -90,7 +90,7 @@ export default function Home({ bets, record }) {
           padding: 1.5rem;
           text-align: left;
           color: inherit;
-          border: 1px solid hsl(160deg, 100%, 40%);;
+          border: 1px solid hsl(160deg, 100%, 40%);
           border-radius: 10px;
           transition: color 0.15s ease, border-color 0.15s ease;
           height: 20em;
@@ -98,7 +98,23 @@ export default function Home({ bets, record }) {
           overflow: auto;
         }
         .Won > p {
-          color: hsl(160deg, 100%, 40%);en;
+          color: hsl(160deg, 100%, 40%);
+        }
+        .Pending {
+          background: hsl(210deg, 38%, 15%);
+          margin: 1em;
+          padding: 1.5rem;
+          text-align: left;
+          color: inherit;
+          border: 1px solid hsl(53deg, 100%, 50%);
+          border-radius: 10px;
+          transition: color 0.15s ease, border-color 0.15s ease;
+          height: 20em;
+          width: 18em;
+          overflow: auto;
+        }
+        .Pending > p {
+          color: hsl(53deg, 100%, 50%);
         }
         main {
           color: hsl(210deg, 8%, 50%);
