@@ -26,7 +26,7 @@ export default function Home({ bets, record }) {
             <div className='player-image'>
               <Image
                 src={bet.playerHeadshot === null ? '/public/basketball.jpg' : bet.playerHeadshot}
-                alt='Picture of player'
+                alt={`Picture of ${bet.player}`}
                 width={220}
                 height={161}
               />
